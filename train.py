@@ -1,14 +1,15 @@
-from sklearn.linear_model import LogisticRegression
 import argparse
 import os
 import numpy as np
 from sklearn.metrics import mean_squared_error
+from sklearn.linear_model import LogisticRegression
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from azureml.core.run import Run
 from azureml.data.dataset_factory import TabularDatasetFactory
+
 
 def clean_data(data):
     # Dict for cleaning data
@@ -48,20 +49,25 @@ def main():
 
     run = Run.get_context()
 
-    run.log("Regularization Strength:", np.float(args.C))
-    run.log("Max iterations:", np.int(args.max_iter))
+    run.log("Regularization Strength:", float(args.C))
+    run.log("Max iterations:", int(args.max_iter))
 
     # TODO: Create TabularDataset using TabularDatasetFactory
     # Data is located at:
     # "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
 
-    ds = ### YOUR CODE HERE ###
+    ### YOUR CODE HERE ###
+    ds = TabularDatasetFactory.from_delimited_files("https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv")
     
     x, y = clean_data(ds)
 
+
     # TODO: Split data into train and test sets.
 
-    ### YOUR CODE HERE ###a
+    x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.33)
+       
+
+  
 
     model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
 
@@ -70,3 +76,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
