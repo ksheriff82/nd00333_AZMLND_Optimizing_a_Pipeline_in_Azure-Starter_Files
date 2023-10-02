@@ -19,7 +19,7 @@ This dataset contains information about the customers, for which we need to gene
 **In 1-2 sentences, explain the solution: e.g. "The best performing model was a ..."**
 Generated two models using hyper drive and AutoML
 Hyper drive Model:
-Used Scikit-learn Pipeline to test the best combination of parameters for a SKLearn logistic regression model. the best hyper drive model we got had accuracy of 0.90492368
+Used Scikit-learn Pipeline to test the best combination of parameters for a SKLearn logistic regression model. the best hyper drive model we got had accuracy of 0.90492368. We also used the BanditPolicy for early termination to avoid excessive usage of resources in case the algorithm being evaluated is not having the desired results while processing, this would avoid wastage of resources by failing fast.
 
 AutoML:Used different regression models, evaluated by AUC_weighted. The best AutoML model was VotingEnsemble with  AUC_weighted of 0.9486.
 ## Scikit-learn Pipeline
